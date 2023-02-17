@@ -1,17 +1,52 @@
+import axios from 'axios'
+import cookie from "js-cookie";
 import { Link } from 'react-router-dom'
+import { useContext } from 'react';
+import { IdUserContext } from '../components/AppContext'
 
 const Home = () => {
+    const idUser = useContext(IdUserContext);
+
+    // jwt deletion
+    const removeCookie = (key) => {
+        if (window !== "undefined") {
+            cookie.remove(key, { expires: 1 });
+        }
+    };
+
+    const logout = async () => {
+        await axios.get(`${process.env.REACT_APP_API_URL}api/logout`, { withCredential: true, credentials:'include' })
+            .then(() => {removeCookie("jwt")
+            console.log('home remove');
+        })
+            .catch((err) => console.log(err));
+
+        window.location = "/";
+    }
 
     return (
-
-
-        <div className='userAndFavoriteField'>
-            <div className='user'>
-                <h1>Veuillez cliquer sur le bouton ci-dessous pour créer votre compte</h1>
-                <Link className='accountCreation' to={'/'} >
-                    <p className='createAccount'>Créer votre compte</p>
-                </Link>
-            </div>
+        <div className='pageOrganisation'>
+            {idUser ?
+                (<div className='featureFrame'>
+                    <h1>Déconnectez-vous</h1>
+                    <p className='accountValidation' onClick={(e) => logout(e)}>Déconnexion</p>
+                    <h1>Accès page utilisateurs</h1>
+                    <Link className='accountCreation' to={'/Users'} >
+                        <p className='createAccount'>Entrer</p>
+                    </Link>
+                </div>)
+                :
+                (<div className='featureFrame'>
+                    <h1>Connectez-vous</h1>
+                    <Link className='accountCreation' to={'/login'} >
+                        <p className='createAccount'>Connexion</p>
+                    </Link>
+                    <h1>Créez votre compte</h1>
+                    <Link className='accountCreation' to={'/register'} >
+                        <p className='createAccount'>Créer votre compte</p>
+                    </Link>
+                </div>)
+            }
         </div>
     )
 }
