@@ -18,7 +18,7 @@ function App() {
       await axios.get(`${process.env.REACT_APP_API_URL}jwtid`, { withCredentials: true, credentials:'include'})
         .then((res) => {
           setIdUser(res.data);
-          console.log(idUser)
+          console.log("app........",idUser)
         })
         .catch((err) => console.log("No token front"));
     };
@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div className='app'>
-      <IdUserContext.Provider value={idUser}>
+      <IdUserContext.Provider value={{idUser, setIdUser }}>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/register' element={<Register />} />
