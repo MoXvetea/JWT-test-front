@@ -18,8 +18,6 @@ const Register = () => {
 
     const validateSignUp = async (e) => {
         e.preventDefault();
-        // const emailError = document.querySelector(".email.error");
-        // const passwordError = document.querySelector(".password.error");
 
         if (password.length < 6) {
             setRedPassword(true);
@@ -35,13 +33,10 @@ const Register = () => {
                 email: email,
                 password: password,
             }
-            // await axios.post(`${process.env.REACT_APP_API_URL}api/register`, newProfile)
-                await axios.post(`${process.env.REACT_APP_API_URL}api/register`, newProfile, {withCredentials:true})             
+            await axios.post(`${process.env.REACT_APP_API_URL}api/register`, newProfile, { withCredentials: true })
                 .then((res) => {
                     console.log(res);
                     if (res.data.errors) {
-                        // emailError.innerHTML = res.data.errors.email;
-                        // passwordError.innerHTML = res.data.errors.password;
                     } else {
                         window.location = "/";
                     }
@@ -89,7 +84,7 @@ const Register = () => {
                         value={passwordConfirmation || ''}
                     />
                 </form>
-                <p className='accountValidation' onClick={(e) => validateSignUp(e)}>Validation inscription</p>
+                <p className='accountValidation green' onClick={(e) => validateSignUp(e)}>Validation inscription</p>
                 <Link className='accountCreation' to={'/'} >
                     <p className='createAccount'>Retour</p>
                 </Link>

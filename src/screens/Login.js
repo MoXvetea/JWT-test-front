@@ -14,8 +14,7 @@ const Login = () => {
             email: email,
             password: password,
         }
-        axios.post(`${process.env.REACT_APP_API_URL}api/login`, loginInfo, { withCredentials: true, credentials:'include'})
-        // axios.post(`${process.env.REACT_APP_API_URL}api/login`, loginInfo)
+        axios.post(`${process.env.REACT_APP_API_URL}api/login`, loginInfo, { withCredentials: true, credentials: 'include' })
             .then((res) => {
                 console.log(res);
                 if (res.data.errors) {

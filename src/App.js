@@ -14,7 +14,6 @@ function App() {
 
   useEffect(() => {
     const fetchToken = async () => {
-      // await axios.get(`${process.env.REACT_APP_API_URL}jwtid`)
       await axios.get(`${process.env.REACT_APP_API_URL}jwtid`, { withCredentials: true, credentials:'include'})
         .then((res) => {
           setIdUser(res.data);

@@ -10,11 +10,9 @@ const Home = () => {
     // jwt deletion
     const removeCookie = (key) => {
         if (window !== "undefined") {
-          cookie.remove(key, { expires: 1 });
+            cookie.remove(key, { expires: 1 });
         }
 
-
-        // }
     };
     const logout = async () => {
         await axios({
@@ -22,8 +20,10 @@ const Home = () => {
             url: `${process.env.REACT_APP_API_URL}api/logout`,
             withCredentials: true,
         })
-            .then(() => {removeCookie("jwt")
-            window.location = "/"})
+            .then(() => {
+                removeCookie("jwt")
+                window.location = "/"
+            })
             .catch((err) => console.log(err));
 
         window.location = "/";
@@ -44,20 +44,18 @@ const Home = () => {
         <div className='pageOrganisation'>
             {idUser !== null ?
                 (<div className='featureFrame'>
-                    {console.log("app........id user......déco", idUser)}
                     <h1>Déconnectez-vous</h1>
                     <p className='accountValidation' onClick={(e) => logout(e)}>Déconnexion</p>
                     <h1>Accès page utilisateurs</h1>
                     <Link className='accountCreation' to={'/Users'} >
-                        <p className='createAccount'>Entrer</p>
+                        <p className='createAccount green'>Entrer</p>
                     </Link>
                 </div>)
                 :
                 (<div className='featureFrame'>
-                    {console.log("app........id user......connexion", idUser)}
                     <h1>Connectez-vous</h1>
                     <Link className='accountCreation' to={'/login'} >
-                        <p className='createAccount'>Connexion</p>
+                        <p className='createAccount green'>Connexion</p>
                     </Link>
                     <h1>Créez votre compte</h1>
                     <Link className='accountCreation' to={'/register'} >

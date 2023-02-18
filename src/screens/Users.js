@@ -9,22 +9,22 @@ const Users = () => {
 
     useEffect(() => {
         console.log('ok user');
-        axios.get(`${process.env.REACT_APP_API_URL}api/users`, {withCredential: true, credentials:'include'})
-                .then(response => {
-                    console.log(response.data);
-                    setUsers(response.data)
-                })
+        axios.get(`${process.env.REACT_APP_API_URL}api/users`, { withCredential: true, credentials: 'include' })
+            .then(response => {
+                console.log(response.data);
+                setUsers(response.data)
+            })
     }, [])
 
     return (
         <div className='pageOrganisation'>
             <div className='featureFrame'>
                 <div className='users'>
-                                    {users? users.map(user =>(
-                    <DisplayUsers key= {user.id} pseudo={user.pseudo} email= {user.email}/>
-                ))
-            :null}
-            </div>
+                    {users ? users.map(user => (
+                        <DisplayUsers key={user.id} pseudo={user.pseudo} email={user.email} />
+                    ))
+                        : null}
+                </div>
 
                 <Link className='accountCreation' to={'/'} >
                     <p className='createAccount'>Retour</p>
