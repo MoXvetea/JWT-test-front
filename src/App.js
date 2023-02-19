@@ -17,7 +17,7 @@ function App() {
       await axios.get(`${process.env.REACT_APP_API_URL}jwtid`, { withCredentials: true, credentials:'include'})
         .then((res) => {
           setIdUser(res.data);
-          console.log("app........",idUser)
+          console.log("app........usEffect")
         })
         .catch((err) => console.log("No token front"));
     };
