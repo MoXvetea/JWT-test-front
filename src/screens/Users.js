@@ -8,7 +8,7 @@ const Users = () => {
     const [users, setUsers] = useState([])
 
     useEffect(() => {
-        console.log('ok user');
+        console.log('useeffect ............ok user');
         axios.get(`${process.env.REACT_APP_API_URL}api/users`, { withCredential: true, credentials: 'include' })
             .then(response => {
                 console.log(response.data);
@@ -20,6 +20,7 @@ const Users = () => {
         <div className='pageOrganisation'>
             <div className='featureFrame'>
                 <div className='users'>
+                    {console.log('users page................',users)}
                     {users ? users.map(user => (
                         <DisplayUsers key={user.id} pseudo={user.pseudo} email={user.email} />
                     ))

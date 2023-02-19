@@ -28,18 +28,6 @@ const Home = () => {
 
         window.location = "/";
     };
-    // const logout = async () => {
-    //     await axios.get(`${process.env.REACT_APP_API_URL}api/logout`, { withCredential: true, credentials: 'include' })
-    //         .then(() => {
-    //             console.log('home remove');
-    //             removeCookie('jwt')
-    //             window.location = "/";
-    //         })
-    //         .catch((err) => console.log(err));
-    //         console.log('home remove...........fail');
-    //         // window.location = "/";
-    // }
-
     return (
         <div className='pageOrganisation'>
             {idUser !== null ?
