@@ -11,44 +11,40 @@ const Users = () => {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        console.log('Users...............useeffect ');
+        // checks if login auth is still valid by comparison, if either one of the tokens value changes fetches token again
         const fetchToken = async () => {
             await axios.get(`${process.env.REACT_APP_API_URL}jwtid`, { withCredentials: true, credentials: 'include' })
                 .then((res) => {
                     setIdVerif(res.data);
-                    console.log('page User.................idverif ', idVerif);
-                    console.log("app........idUser", idUser)
                 })
-                .catch((err) => console.log("No token front"));
+                .catch((err) => {
+                    console.log(err)
+                    window.location = "/"
+                })
+            if (idUser === idVerif) {
+                axios.get(`${process.env.REACT_APP_API_URL}api/users`)
+                    .then(response => {
+                        setUsers(response.data)
+                    })
+            }
         };
         fetchToken();
-        },[idVerif]);
-
-        // if (idVerif === idUser) {
-
-            // axios.get(`${process.env.REACT_APP_API_URL}api/users`, { withCredential: true, credentials: 'include' })
-            //     .then(response => {
-            //         console.log(response.data);
-            //         setUsers(response.data)
-            //     })
-        // } else {
-        //     window.location = "/"
-        // }
-        // }, [])
-    // }, [idVerif, idUser]);
+    }, [idVerif, idUser]);
 
     return (
         <div className='pageOrganisation'>
             <div className='featureFrame'>
+                {/* checks if token has been fetched */}
+            {(idVerif)  !== null ?
                 <div className='users'>
-                    {/* {console.log('users page................',users)} */}
                     {users ? users.map(user => (
-                        <DisplayUsers key={user.id} pseudo={user.pseudo} email={user.email} />
+                        <DisplayUsers key={user._id} pseudo={user.pseudo} email={user.email} />
                     ))
                         : null}
                 </div>
-
-                <Link className='accountCreation' to={'/'} >
+                :
+                <h1>Veuillez vous connecter</h1>}
+                <Link className='linkButton' to={'/'} >
                     <p className='createAccount'>Retour</p>
                 </Link>
             </div>

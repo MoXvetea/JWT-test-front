@@ -16,12 +16,10 @@ const Login = () => {
         }
         axios.post(`${process.env.REACT_APP_API_URL}api/login`, loginInfo, { withCredentials: true, credentials: 'include' })
             .then((res) => {
-                console.log(res);
                 if (res.data.errors) {
                     console.log(res.data.errors.email);
                     console.log(res.data.errors.password);
                 } else {
-                    console.log('okk axios login front');
                     window.location = "/";
                 }
             })
@@ -31,7 +29,6 @@ const Login = () => {
         setEmail();
         setPassword();
         loginInfo = null;
-
     };
 
     return (
@@ -41,18 +38,20 @@ const Login = () => {
                 <form className='form'>
                     <input
                         type='email' placeholder='email'
+                        autoComplete="username"
                         onChange={e => setEmail(e.target.value)}
                         value={email || ''}
                     />
                     <input
                         type='password'
                         placeholder='mot de passe, 6 caratères minimum'
+                        autoComplete="new-password"
                         onChange={e => setPassword(e.target.value)}
                         value={password || ''}
                     />
                 </form>
                 <p className='accountValidation' onClick={(e) => validateLogin(e)}>Login</p>
-                <Link className='accountCreation' to={'/'} >
+                <Link className='linkButton' to={'/'} >
                     <p className='createAccount'>Retour</p>
                 </Link>
             </div>

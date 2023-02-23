@@ -57,35 +57,38 @@ const Register = () => {
         <div className='pageOrganisation'>
             <div className='featureFrame'>
                 <h1>Formulaire d'inscription</h1>
-
                 <form className='form'>
                     <input className={redPseudo ? 'red' : null}
                         onClick={(e) => setRedPseudo(false)}
                         placeholder='Pseudo'
+                        autoComplete="username"
                         onChange={e => setPseudo(e.target.value)}
                         value={pseudo || ''}
                     />
                     <input className={redEmail ? 'red' : null}
                         type='email' placeholder='email'
+                        autoComplete="email"
                         onClick={(e) => setRedEmail(false)}
                         onChange={e => setEmail(e.target.value)}
                         value={email || ''}
                     />
                     <input className={redPassword ? 'red' : null}
                         type='password' placeholder='mot de passe, 6 caractères minimun'
+                        autoComplete="current-password"
                         onClick={(e) => setRedPassword(false)}
                         onChange={e => setPassword(e.target.value)}
                         value={password || ''}
                     />
                     <input className={redPassword2 ? 'red' : null}
                         type='password' placeholder='Confirmation mot de passe'
+                        autoComplete="new-password"
                         onClick={(e) => setRedPassword2(false)}
                         onChange={(e) => setPasswordConfirmation(e.target.value)}
                         value={passwordConfirmation || ''}
                     />
                 </form>
                 <p className='accountValidation green' onClick={(e) => validateSignUp(e)}>Validation inscription</p>
-                <Link className='accountCreation' to={'/'} >
+                <Link className='linkButton' to={'/'} >
                     <p className='createAccount'>Retour</p>
                 </Link>
             </div>
