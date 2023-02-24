@@ -13,7 +13,10 @@ const Users = () => {
     useEffect(() => {
         // checks if login auth is still valid by comparison, if either one of the tokens value changes fetches token again
         const fetchToken = async () => {
-            await axios.get(`${process.env.REACT_APP_API_URL}jwtid`, { withCredentials: true, credentials: 'include' })
+            // await axios.get(`${process.env.REACT_APP_API_URL}jwtid`, { withCredentials: true, credentials: 'include' } )
+            await axios.get(`${process.env.REACT_APP_API_URL}jwtid`,   {headers: {
+                Authorization: `Bearer ${accessToken}`}
+              } )
                 .then((res) => {
                     setIdVerif(res.data);
                 })
@@ -21,12 +24,12 @@ const Users = () => {
                     console.log(err)
                     window.location = "/"
                 })
-            if (idUser === idVerif) {
-                axios.get(`${process.env.REACT_APP_API_URL}api/users`)
-                    .then(response => {
-                        setUsers(response.data)
-                    })
-            }
+        //     if (idUser === idVerif) {
+        //         axios.get(`${process.env.REACT_APP_API_URL}api/users`,{ withCredentials: true, credentials: 'include' })
+        //             .then(response => {
+        //                 setUsers(response.data)
+        //             })
+        //     }
         };
         fetchToken();
     }, [idVerif, idUser]);
@@ -53,3 +56,21 @@ const Users = () => {
 }
 
 export default Users
+
+// import axios from 'axios';
+
+// const API_URL = 'https://example.com/api';
+
+// const accessToken = 'your-access-token';
+
+// axios.get(`${API_URL}/resource`, {
+//   headers: {
+//     Authorization: `Bearer ${accessToken}`
+//   }
+// })
+// .then(response => {
+//   console.log(response.data);
+// })
+// .catch(error => {
+//   console.error(error);
+// });
