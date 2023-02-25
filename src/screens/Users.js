@@ -15,13 +15,14 @@ const Users = () => {
 
         const fetchToken = async () => {
             console.log(accessToken);
-            await axios.get(`${process.env.REACT_APP_API_URL}api/users`, {headers: {
+            await axios.get(`${process.env.REACT_APP_API_URL}users`, {headers: {
                 // await axios.get(`${process.env.REACT_APP_API_URL}check`, {headers: {
                 Authorization: `Bearer ${accessToken}`}
             } )
             .then((res) => {
                 console.log("users=", res.data);
-                setIdVerif(res.data);
+
+                setUsers(res.data);
             })
             .catch((err) => {
                 console.log(err)
@@ -35,7 +36,13 @@ const Users = () => {
                 <div className='pageOrganisation'>
             <div className='featureFrame'>
                 {/* checks if token has been fetched */}
-            {(idVerif)  !== null ?
+                <div className='users'>
+                {users ? users.map(user => (
+                        <DisplayUsers key={user._id} pseudo={user.pseudo} email={user.email} />
+                    ))
+                        : null}
+                        </div>
+            {/* {(idVerif)  !== null ?
                 <div className='users'>
                     {users ? users.map(user => (
                         <DisplayUsers key={user._id} pseudo={user.pseudo} email={user.email} />
@@ -43,7 +50,7 @@ const Users = () => {
                         : null}
                 </div>
                 :
-                <h1>Veuillez vous connecter</h1>}
+                <h1>Veuillez vous connecter</h1>} */}
                 <Link className='linkButton' to={'/'} >
                     <p className='createAccount'>Retour</p>
                 </Link>
