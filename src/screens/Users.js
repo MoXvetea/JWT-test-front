@@ -9,33 +9,30 @@ const Users = () => {
     const { idUser } = useContext(IdUserContext);
     const [idVerif, setIdVerif] = useState(null);
     const [users, setUsers] = useState([]);
-
+    const accessToken = JSON.parse(sessionStorage.getItem('accessToken'))
+    
     useEffect(() => {
-        // checks if login auth is still valid by comparison, if either one of the tokens value changes fetches token again
-        const fetchToken = async () => {
-            // await axios.get(`${process.env.REACT_APP_API_URL}jwtid`, { withCredentials: true, credentials: 'include' } )
-            await axios.get(`${process.env.REACT_APP_API_URL}jwtid`,   {headers: {
-                Authorization: `Bearer ${accessToken}`}
-              } )
-                .then((res) => {
-                    setIdVerif(res.data);
-                })
-                .catch((err) => {
-                    console.log(err)
-                    window.location = "/"
-                })
-        //     if (idUser === idVerif) {
-        //         axios.get(`${process.env.REACT_APP_API_URL}api/users`,{ withCredentials: true, credentials: 'include' })
-        //             .then(response => {
-        //                 setUsers(response.data)
-        //             })
-        //     }
-        };
-        fetchToken();
-    }, [idVerif, idUser]);
 
-    return (
-        <div className='pageOrganisation'>
+        const fetchToken = async () => {
+            console.log(accessToken);
+            await axios.get(`${process.env.REACT_APP_API_URL}api/users`, {headers: {
+                // await axios.get(`${process.env.REACT_APP_API_URL}check`, {headers: {
+                Authorization: `Bearer ${accessToken}`}
+            } )
+            .then((res) => {
+                console.log("users=", res.data);
+                setIdVerif(res.data);
+            })
+            .catch((err) => {
+                console.log(err)
+                window.location = "/"
+            })
+                };
+                fetchToken();
+            }, [idVerif, idUser]);
+            
+            return (
+                <div className='pageOrganisation'>
             <div className='featureFrame'>
                 {/* checks if token has been fetched */}
             {(idVerif)  !== null ?

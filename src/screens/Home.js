@@ -21,6 +21,7 @@ const Home = () => {
         })
             .then(() => {
                 removeCookie("jwt")
+                sessionStorage.clear('accessToken');
                 window.location = "/"
             })
             .catch((err) => console.log(err));
