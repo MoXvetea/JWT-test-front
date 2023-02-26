@@ -37,6 +37,7 @@ const Home = () => {
                     <Link className='linkButton' to={'/Users'} >
                         <p className='createAccount green'>Entrer</p>
                     </Link>
+                    {console.log(idUser)}
                 </div>)
                 :
                 (<div className='featureFrame'>

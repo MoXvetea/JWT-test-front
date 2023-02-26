@@ -20,10 +20,7 @@ const Login = () => {
                     console.log(res.data.errors.email);
                     console.log(res.data.errors.password);
                 } else {
-                    // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                    console.log('response login',res.data);
                     const  accessToken  = res.data;
-                    console.log('avant localstorage', accessToken);
                     sessionStorage.setItem('accessToken', JSON.stringify(accessToken.accessToken));
                     // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                     window.location = "/";
