@@ -1,5 +1,11 @@
 
-Jwt authentication and authorization based on httpOnly cookie.
+### `Jwt authentication and authorization:`
+
+=> access token stored in session storage
+
+=> refresh token stored in httpOnly cookie
+
+### `Misc` 
 
 Please check the .env.sample file before test.
 
