@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import DisplayUsers from '../components/DisplayUsers'
-import instance from '../Api';
+import instance from '../InstanceAxiosApi';
 
 const Users = () => {
     const [users, setUsers] = useState([]);
