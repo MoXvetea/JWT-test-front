@@ -18,9 +18,8 @@ function App() {
       await axios.get(`${process.env.REACT_APP_API_URL}jwtid`, { withCredentials: true, credentials: 'include' })
         .then((res) => {
           setIdUser(res.data);
-          console.log(idUser);
         })
-        .catch((err) => console.log('No access granted'));
+        .catch((err) => console.error('No access granted'));
     };
     fetchToken();
   }, [idUser]);

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
+
 const Login = () => {
 
     const [email, setEmail] = useState("");
@@ -17,12 +18,11 @@ const Login = () => {
         axios.post(`${process.env.REACT_APP_API_URL}api/login`, loginInfo, { withCredentials: true, credentials: 'include' })
             .then((res) => {
                 if (res.data.errors) {
-                    console.log(res.data.errors.email);
-                    console.log(res.data.errors.password);
+                    console.error(res.data.errors.email);
+                    console.error(res.data.errors.password);
                 } else {
                     const  accessToken  = res.data;
                     sessionStorage.setItem('accessToken', JSON.stringify(accessToken.accessToken));
-                    // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                     window.location = "/";
                 }
             })
