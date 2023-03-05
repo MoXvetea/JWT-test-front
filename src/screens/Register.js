@@ -33,16 +33,23 @@ const Register = () => {
                 email: email,
                 password: password,
             }
-            await axios.post(`${process.env.REACT_APP_API_URL}api/register`, newProfile, { withCredentials: true })
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/register`, newProfile, { withCredentials: true })
                 .then((res) => {
-                    console.log(res);
-                    if (res.data.errors) {
+                    if (res.data.errors !== undefined) {
+                        if (res.data.errors.pseudo) {
+                            alert(`error......${res.data.errors.pseudo}`);
+                        } else if (res.data.errors.email) {
+                            alert(`error......${res.data.errors.email}`);
+                        } else {
+                            alert(`error......${res.data.errors.password}`);
+                        }
                     } else {
                         window.location = "/";
+                        alert('Compte créé, vous pouvez vous connecter')
                     }
                 })
                 .catch((err) => {
-                    console.log(err);
+                    console.error(err);
                 });
             // temp state reset
             setPseudo();

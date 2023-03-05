@@ -15,14 +15,14 @@ function App() {
   useEffect(() => {
     // checks if connected
     const fetchToken = async () => {
-      await axios.get(`${process.env.REACT_APP_API_URL}jwtid`, { withCredentials: true, credentials: 'include' })
+      await axios.get(`${process.env.REACT_APP_API_URL}/jwtid`, { withCredentials: true, credentials: 'include' })
         .then((res) => {
           setIdUser(res.data);
         })
         .catch((err) => console.error('No access granted'));
     };
     fetchToken();
-  }, [idUser]);
+  }, []);
 
   return (
     <div className='app'>

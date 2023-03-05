@@ -16,7 +16,7 @@ const Home = () => {
     const logout = async () => {
         await axios({
             method: "get",
-            url: `${process.env.REACT_APP_API_URL}api/logout`,
+            url: `${process.env.REACT_APP_API_URL}/api/logout`,
             withCredentials: true,
         })
             .then(() => {
@@ -24,7 +24,7 @@ const Home = () => {
                 sessionStorage.clear('accessToken');
                 window.location = "/"
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.error(err));
         window.location = "/";
     };
     return (

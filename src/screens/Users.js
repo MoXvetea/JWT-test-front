@@ -5,13 +5,14 @@ import instance from '../InstanceAxiosApi';
 
 const Users = () => {
     const [users, setUsers] = useState([]);
-    const accessToken = JSON.parse(sessionStorage.getItem('accessToken'))
+    // const accessToken = JSON.parse(sessionStorage.getItem('accessToken'))
+    const accessToken = sessionStorage.getItem("accessToken")
 
     // Access token check
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await instance.get('users', {
+                const response = await instance.get('/users', {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 });
                 setUsers(response.data);
@@ -20,7 +21,7 @@ const Users = () => {
             }
         };
         fetchUsers();
-
+// eslint-disable-next-line
     }, []);
 
 

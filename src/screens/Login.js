@@ -15,19 +15,18 @@ const Login = () => {
             email: email,
             password: password,
         }
-        axios.post(`${process.env.REACT_APP_API_URL}api/login`, loginInfo, { withCredentials: true, credentials: 'include' })
+        axios.post(`${process.env.REACT_APP_API_URL}/api/login`, loginInfo, { withCredentials: true, credentials: 'include' })
             .then((res) => {
-                if (res.data.errors) {
-                    console.error(res.data.errors.email);
-                    console.error(res.data.errors.password);
+                    if (res.data.errors !== undefined){
+                        res.data.errors.email?  alert(`error......${res.data.errors.email}`):alert(`error......${res.data.errors.password}`)
                 } else {
-                    const  accessToken  = res.data;
+                    const accessToken = res.data;
                     sessionStorage.setItem('accessToken', JSON.stringify(accessToken.accessToken));
                     window.location = "/";
                 }
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             });
         setEmail();
         setPassword();
